@@ -32,8 +32,15 @@ object Day1_part1 extends App {
   def replaceFirstTextByDigits(in: String, invert: Boolean = false): String = {
     var words =
       List(
-        "one","two","three","four","five",
-        "six","seven","eight","nine"
+        "one",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six",
+        "seven",
+        "eight",
+        "nine"
       )
 
     var res = in
@@ -61,35 +68,57 @@ object Day1_part1 extends App {
       res = res.replaceFirst(firstToReplace, stringDigitReprs(firstToReplace))
     }
 
-    if(invert)
+    if (invert)
       res.reverse
     else
       res
   }
 
-  def replaceLastTextByDigit(s: String) : String = {
-    replaceFirstTextByDigits(s, true)
-  }
+  def replaceLastTextByDigit(s: String): String = replaceFirstTextByDigits(s, true)
 
   def removeOthers(x: String): String = x.filter(_.isDigit)
 
   def makeNumber(in: String): Int = Integer.parseInt("" + in.head + in.last)
 
+  def compute2ndPart(in: List[String]): List[Int] = {
+    val first_digits = 
+      in
+      .map(replaceFirstTextByDigits(_))
+      .map(removeOthers(_))
+      
+
+    val last_digits = in
+      .map(replaceLastTextByDigit(_))
+      .map(removeOthers(_))
+
+    val res = 
+      for(i <- first_digits.indices)
+        yield ("" + first_digits(i).head + last_digits(i).last).toInt
+
+    res.toList
+  }
+
   // Do some basic checks
   assert(replaceFirstTextByDigits("asdftwofour") == "asdf2four")
   assert(replaceFirstTextByDigits("fourasdffour") == "4asdffour")
   assert(replaceFirstTextByDigits("123fourttt") == "1234ttt")
-  assert(makeNumber(removeOthers(replaceLastTextByDigit(replaceFirstTextByDigits("fpxmmbthreeninethreefour3six")))) == 36)
-  
-  // That one was a pain
   assert(replaceLastTextByDigit("twone") == "tw1")
 
-  val sol = dataFull
-     .map(replaceFirstTextByDigits(_))
-     .map(replaceLastTextByDigit(_))
-     .map(removeOthers(_))
-     .map(makeNumber(_))
+  // The small example
+  val demo = """two1nine
+               |eightwothree
+               |abcone2threexyz
+               |xtwone3four
+               |4nineeightseven2
+               |zoneight234
+               |7pqrstsixteen"""
+  val demoData = demo.split("\n").toList
+
+  assert(compute2ndPart(demoData).sum == 281)
+
+  // A nasty one
+  assert(compute2ndPart(List("11lttrkpcljbbrmponeightbb")).sum == 18)
 
   // This answer is off by 1, I don't know why
-  println(s"Part 2 solution: ${sol.sum}")
+  println(s"Part 2 solution: ${compute2ndPart(dataFull).sum}")
 }

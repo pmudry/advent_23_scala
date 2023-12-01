@@ -13,11 +13,13 @@ object Utils {
       path: String = path,
       full: Boolean
   ): List[String] = {
-    
+
     var fullPath = s"${path}input_day${day}"
 
     if (!full)
-      fullPath = fullPath + "_simple"
+      fullPath += "_simple"
+    else
+      fullPath += "_other"
 
     fullPath += ".txt"
 
