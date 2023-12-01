@@ -29,6 +29,15 @@ object Day1_part1 extends App {
   println(s"Part 1 solution: ${computePart1(dataFull)}")
 
   /////////// Second part
+
+  /**
+    * This method is two-fold
+    * It replaces the first sub-string which correspond to a number to a digit. If 
+    * invert is true, we start from the end and we reverse what we are looking for
+    * @param in
+    * @param invert
+    * @return
+    */
   def replaceFirstTextByDigits(in: String, invert: Boolean = false): String = {
     var words =
       List(
@@ -56,7 +65,7 @@ object Day1_part1 extends App {
     val stringDigitReprs: Map[String, String] =
       (for (i <- words.indices)
         yield (words(i) -> nbrs(i).toString())).toMap
-
+        
     val filtered =
       words.zipWithIndex
         .map(t => (res.indexOf(t._1), t._2))
@@ -74,28 +83,21 @@ object Day1_part1 extends App {
       res
   }
 
-  def replaceLastTextByDigit(s: String): String = replaceFirstTextByDigits(s, true)
+  def replaceLastTextByDigit(s: String): String =
+    replaceFirstTextByDigits(s, true)
 
   def removeOthers(x: String): String = x.filter(_.isDigit)
 
-  def makeNumber(in: String): Int = Integer.parseInt("" + in.head + in.last)
-
   def compute2ndPart(in: List[String]): List[Int] = {
-    val first_digits = 
-      in
+    val first_digits = in
       .map(replaceFirstTextByDigits(_))
       .map(removeOthers(_))
-      
 
     val last_digits = in
       .map(replaceLastTextByDigit(_))
       .map(removeOthers(_))
 
-    val res = 
-      for(i <- first_digits.indices)
-        yield ("" + first_digits(i).head + last_digits(i).last).toInt
-
-    res.toList
+    first_digits zip last_digits map { case (a, b) => ("" + a.head + b.last).toInt }
   }
 
   // Do some basic checks
