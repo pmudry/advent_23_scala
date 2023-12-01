@@ -4,8 +4,10 @@
 
 - Themes : numbers and regexp style
 - First part difficulty : 1 / 4
-- Difficulty : 3/4
-- Comments : first part was interesting. The second one was - IMO - badly explained and took me longer than expected because of this. For instance `3twone` is supposed to yield `31`, which is not so clear when looking at the problem description. My answer is off by one and I don't know why but an error during copy-paste made it work so I consider it finished.
+- Second part difficulty : 3 / 4
+- First part interest : 4 / 4
+- Secon part interest : 2 / 4
+- Comments : The first part was interesting and very in the style of the Advent of Code. The second one was - IMO - badly explained and took me longer than expected because of this. For instance `3twone` is supposed to yield `31`, which is not so clear when looking at the problem description.
 
 - Problem description:
 
