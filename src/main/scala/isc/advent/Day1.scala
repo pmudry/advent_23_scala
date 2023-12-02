@@ -113,6 +113,6 @@ object Day1 extends App {
   // A nasty one
   assert(compute2ndPart(List("11lttrkpcljbbrmponeightbb")).sum == 18)
 
-  // This answer is off by 1, I don't know why
+  // Tada
   println(s"Part 2 solution: ${compute2ndPart(dataFull).sum}")
 }

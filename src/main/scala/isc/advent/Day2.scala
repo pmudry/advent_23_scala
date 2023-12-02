@@ -73,8 +73,16 @@ object Day2 extends App {
   println(s"Part 1 solution: ${computePart1(dataParsedFull)}")
 
   /////////// Second part
-  def computePart2(data: List[String]): Int = ???
+  def computePart2(data: List[Game]): Int = {
+    data
+      .map((g: Game) => {
+        val maxR = g.tries.map(_.nRed).max
+        val maxG = g.tries.map(_.nGreen).max
+        val maxB = g.tries.map(_.nBlue).max
+        maxR * maxG * maxB
+      })
+      .sum
+  }
 
-  // // This answer is off by 1, I don't know why
-  // println(s"Part 2 solution: ${computePart2(dataFull)}")
+  println(s"Part 2 solution: ${computePart2(dataParsedFull)}")
 }
