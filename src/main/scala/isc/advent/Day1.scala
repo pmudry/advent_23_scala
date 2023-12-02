@@ -12,19 +12,11 @@ object Day1_part1 extends App {
     if (t.length() == 1)
       Integer.parseInt(t + t)
     else
-      List(t.head, t.last)
-        .foldLeft("")((x, y) => x + y)
-        .toInt
+      ("" + t.head + t.last).toInt
   }
 
-  def computePart1(in: List[String]): Int = {
-    var s: Int = 0
-
-    for (d <- in)
-      s += extractNumber(d)
-
-    s
-  }
+  def computePart1(in: List[String]): Int =
+    in.map(extractNumber(_)).sum
 
   println(s"Part 1 solution: ${computePart1(dataFull)}")
 
