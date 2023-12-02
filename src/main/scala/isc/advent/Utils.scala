@@ -19,7 +19,7 @@ object Utils {
     if (!full)
       fullPath += "_simple"
     else
-      fullPath += "_other"
+      fullPath += ""
 
     fullPath += ".txt"
 
