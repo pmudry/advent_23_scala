@@ -19,7 +19,7 @@ object Day2 extends App {
       def makeTry(s: String): Try = {
         val allThePairs: Map[String, Int] =
           s.split(",")
-            .map(x =>        
+            .map(x =>
               // We need a map for colors, as they are mixed
               x.trim match {
                 case s"$n $color" => (color, n.toInt)
@@ -37,6 +37,7 @@ object Day2 extends App {
       s.split(";").map(makeTry(_)).toList
     }
 
+    // Top level parsing of each line
     for (line <- in) {
       val g: Game = line match {
         case s"Game $id: $tries" =>
@@ -49,16 +50,30 @@ object Day2 extends App {
     res.toList
   }
 
-  // Testint input
+  // Testing  input
+  val dataParsedSmall = parseInput(dataSmall)
+  val dataParsedFull = parseInput(dataFull)
 
-  println(parseInput(dataSmall).mkString("\n"))
+  // println(dataParsedSmall.mkString("\n"))
 
-  def computePart1(data: List[String]): Int = ???
+  def computePart1(data: List[Game]): Int = {
+    def isPossible(g: Game): Boolean = {
+      // The only valid games are those which have 12 or les reds, ...
+      g.tries.map(_.nRed).forall(_ <= 12) &&
+      g.tries.map(_.nGreen).forall(_ <= 13) &&
+      g.tries.map(_.nBlue).forall(_ <= 14)
+    }
 
-  // println(s"Part 1 solution: ${computePart1(dataFull)}")
+    data
+      .filter((g: Game) => isPossible(g))
+      .map(_.id)
+      .sum
+  }
 
-  // /////////// Second part
-  // def computePart2(data: List[String]): Int = ???
+  println(s"Part 1 solution: ${computePart1(dataParsedFull)}")
+
+  /////////// Second part
+  def computePart2(data: List[String]): Int = ???
 
   // // This answer is off by 1, I don't know why
   // println(s"Part 2 solution: ${computePart2(dataFull)}")
