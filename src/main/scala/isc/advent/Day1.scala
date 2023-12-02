@@ -1,7 +1,7 @@
 import isc.advent.Utils
 import scala.collection.mutable.ArrayBuffer
 
-object Day1_part1 extends App {
+object Day1 extends App {
   val day = 1
   val dataSmall: List[String] = Utils.getSimpleData(day)
   val dataFull: List[String] = Utils.getFullData(day)
